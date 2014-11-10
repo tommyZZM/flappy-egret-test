@@ -11,7 +11,11 @@ var Main = (function (_super) {
     __extends(Main, _super);
     function Main() {
         _super.call(this);
-        console.log('123');
+        Constant.trace('Luaching flappy egret ' + Constant.version + ' code by tommy!');
+        this.start();
     }
+    Main.prototype.start = function () {
+        return new GameController(this);
+    };
     return Main;
 })(egret.DisplayObjectContainer);

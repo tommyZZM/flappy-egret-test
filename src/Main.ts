@@ -5,9 +5,15 @@ class Main extends egret.DisplayObjectContainer{
 
     public constructor() {
         super();
-        console.log('123');
-        console
+        Constant.trace('Luaching flappy egret '+Constant.version+' code by tommy!');
+
+        this.start();
     }
+
+    private start(){
+        return new GameController(this);
+    }
+
 }
 
 
