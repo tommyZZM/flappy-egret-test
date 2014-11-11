@@ -9,13 +9,19 @@
         {"name":"obj_ground",  "type":"image","url":"assets/fence.png"},
         {"name":"obj_obstacle","type":"image","url":"assets/finger.png"},
         {"name":"over_title",   "type":"image","url":"assets/gameover.png"},
-        {"name":"over_level",   "type":"image","url":"assets/medals.png"},
-        {"name":"over_dia",  "type":"image","url":"assets/scoreboard.png"}
+        {"name":"over_medal",   "type":"image","url":"assets/medals.png"},
+        {"name":"over_dia",  "type":"image","url":"assets/scoreboard.png"},
+        {
+            "keys":"flappyfont",
+			"name":"flappyfont",
+			"type":"font",
+			"url":"assets/fonts/flappyfont.fnt"
+		}
 	],
 
 "groups":
 	[
         {"name":"preload","keys":"background"},
-        {"name":"mainload","keys":"button_start,button_over,obj_flappy,obj_ground,obj_obstacle,over_title,over_level,over_dia"}
+        {"name":"mainload","keys":"button_start,button_over,obj_flappy,obj_ground,obj_obstacle,over_title,over_medal,over_dia,flappyfont"}
 	]
 }

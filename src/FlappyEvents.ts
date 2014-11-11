@@ -8,6 +8,8 @@ class FlappyEvents extends egret.Event {
     public status:number = GameStatus.HELLO;
     public flappy:SpriteEx = null;
     public ground:Ground = null;
+    public score:egret.BitmapText = null;
+    public medal:Medal = null;
 
     public constructor(type:string, bubbles:boolean = false, cancelable:boolean = false) {
         //TODO:your code here

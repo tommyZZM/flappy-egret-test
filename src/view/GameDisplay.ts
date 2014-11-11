@@ -1,4 +1,4 @@
-class UserInterface extends egret.DisplayObjectContainer{
+class GameDisplay extends egret.DisplayObjectContainer{
 
     private run:FlappyEvents = new FlappyEvents(FlappyEvents.GAME_RUN);
 
@@ -24,7 +24,7 @@ class UserInterface extends egret.DisplayObjectContainer{
 
         var proportion = this.background.width/this.background.height;
 
-        this.background.height = this.background.texture.textureHeight = GlobalVar.stage_height();
+        this.background.height = GlobalVar.stage_height();
         Constant.trace('Global.height ' +GlobalVar.stage_height()+ ' background.height ' +this.background.height);
         //this.background.width = this.background.height / proportion;
 
@@ -35,6 +35,16 @@ class UserInterface extends egret.DisplayObjectContainer{
         this.button_start = new Button('button_start',this,
             GlobalVar.stage_width()>>1,GlobalVar.stage_height()>>1,'center');
         this.button_start.addEventListener(egret.TouchEvent.TOUCH_TAP,this.readyPlay,this);
+
+        var spriteSheet:egret.BitmapTextSpriteSheet = RES.getRes("flappyfont");
+        this.run.score = new egret.BitmapText();
+        this.run.score.spriteSheet = spriteSheet;
+        this.run.score.anchorX = this.run.score.anchorY = 0.5;
+        this.run.score.x = GlobalVar.stage_width()>>1;
+        this.run.score.y = 100;
+        this.run.score.text = '0';
+
+        this.addChild(this.run.score);
 
         this.run.ground = new Ground('obj_ground',GlobalVar.stage_width());
         this.addChild(this.run.ground);
@@ -52,7 +62,7 @@ class UserInterface extends egret.DisplayObjectContainer{
 
     private initGame(){
         if(!this.run.flappy){
-            this.run.flappy = new SpriteEx('obj_flappy',this,100,(this.run.ground.level>>1),'center');
+            this.run.flappy = new SpriteEx('obj_flappy',this,GameVar.flappy_pos,(this.run.ground.level>>1),'center');
         }else{
             this.run.flappy.rotation = 0;
             this.run.flappy.x = 100;
@@ -71,19 +81,19 @@ class UserInterface extends egret.DisplayObjectContainer{
 
     public overPlay(){
         this.run.status = GameStatus.OVER;
-        this.dispatchEvent(this.run);
-
         this.displayOverDialog();
+        this.dispatchEvent(this.run);
     }
 
     private displayOverDialog(){
         if(!this.over_dia){
             this.initOverDialog();
         }else{
-            this.over_dia.visible = true;
-            this.over_title.visible = true;
-            this.button_restart.visible = true;
+            this.over_dia.visible = true;this.setChildIndex(this.over_dia,this.numChildren+1);
+            this.over_title.visible = true;this.setChildIndex(this.over_title,this.numChildren+1);
+            this.button_restart.visible = true;this.setChildIndex(this.button_restart,this.numChildren+1);
         }
+
     }
 
     private initOverDialog(){
@@ -100,6 +110,8 @@ class UserInterface extends egret.DisplayObjectContainer{
         this.button_restart.y = this.over_dia.y+120;
         this.button_restart.scale(0.6);
 
+        this.run.medal = new Medal();
+        this.over_dia.addChild(this.run.medal);
 
         this.addChild(this.button_restart);
         this.addChild(this.over_dia);
