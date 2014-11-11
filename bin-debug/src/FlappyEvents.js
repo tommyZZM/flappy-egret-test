@@ -11,8 +11,12 @@ var FlappyEvents = (function (_super) {
         if (cancelable === void 0) { cancelable = false; }
         //TODO:your code here
         _super.call(this, type, bubbles, cancelable);
+        this.status = GameStatus.HELLO;
+        this.flappy = null;
+        this.ground = null;
     }
     FlappyEvents.PRE_READY = "preReady";
     FlappyEvents.ASSET_READY = "assetReady";
+    FlappyEvents.GAME_RUN = "gameRun";
     return FlappyEvents;
 })(egret.Event);

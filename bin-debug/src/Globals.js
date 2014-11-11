@@ -13,6 +13,13 @@ var Constant = (function () {
     Constant.debug = true;
     return Constant;
 })();
+var GameVar = (function () {
+    function GameVar() {
+    }
+    GameVar.world_speed = 2;
+    GameVar.tap_conut = 0;
+    return GameVar;
+})();
 var GlobalVar = (function () {
     function GlobalVar() {
     }

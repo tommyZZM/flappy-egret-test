@@ -7,10 +7,10 @@ var GameController = (function () {
         this.game = new GameLiveCircleModel(stage);
     }
     GameController.prototype.preLoaded = function () {
-        this.game.ready();
+        this.game.pre();
     };
     GameController.prototype.allLoaded = function () {
-        this.game.run(GameStatus.READY);
+        this.game.hell();
     };
     return GameController;
 })();

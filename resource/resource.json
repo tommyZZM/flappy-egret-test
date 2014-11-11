@@ -4,18 +4,18 @@
         {"name":"background","type":"image","url":"assets/BG_day.png"},
 
         {"name":"button_start","type":"image","url":"assets/instructions.png"},
-        {"name":"button_share","type":"image","url":"assets/button.png"},
-        {"name":"obj_birdie",  "type":"image","url":"assets/birdie.png"},
+        {"name":"button_over","type":"image","url":"assets/button.png"},
+        {"name":"obj_flappy",  "type":"image","url":"assets/birdie.png"},
         {"name":"obj_ground",  "type":"image","url":"assets/fence.png"},
         {"name":"obj_obstacle","type":"image","url":"assets/finger.png"},
-        {"name":"end_title",   "type":"image","url":"assets/gameover.png"},
-        {"name":"end_level",   "type":"image","url":"assets/medals.png"},
-        {"name":"end_window",  "type":"image","url":"assets/scoreboard.png"}
+        {"name":"over_title",   "type":"image","url":"assets/gameover.png"},
+        {"name":"over_level",   "type":"image","url":"assets/medals.png"},
+        {"name":"over_dia",  "type":"image","url":"assets/scoreboard.png"}
 	],
 
 "groups":
 	[
         {"name":"preload","keys":"background"},
-        {"name":"mainload","keys":"button_start,button_share,obj_birdie,obj_ground,obj_obstacle,end_title,end_level,end_window"}
+        {"name":"mainload","keys":"button_start,button_over,obj_flappy,obj_ground,obj_obstacle,over_title,over_level,over_dia"}
 	]
 }

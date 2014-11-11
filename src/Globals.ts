@@ -13,7 +13,15 @@ class Constant{
 
 }
 
+class GameVar{
+    public static world_speed:number = 2;
+
+    public static tap_conut:number = 0;
+}
+
 class GlobalVar{
+
+
 
     public static stage_width():number
     {
@@ -27,7 +35,8 @@ class GlobalVar{
 }
 
 class GameStatus{
-    public static READY = -1;
-    public static PLAYING = 1;
+    public static HELLO = -1;
+    public static READY = 1;
+    public static PLAYING = 2;
     public static OVER = 0;
 }

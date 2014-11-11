@@ -13,11 +13,11 @@ class GameController {
     }
 
     private preLoaded(){
-        this.game.ready();
+        this.game.pre();
     }
 
     private allLoaded(){
-        this.game.run(GameStatus.READY);
+        this.game.hell();
     }
 
 
