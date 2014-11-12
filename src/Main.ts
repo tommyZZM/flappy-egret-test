@@ -19,6 +19,9 @@ class Main extends egret.DisplayObjectContainer{
     }
 
     private start(){
+        if(Constant.debug){
+            egret.Profiler.getInstance().run();
+        }
         this.removeEventListener(egret.Event.ADDED_TO_STAGE,this.start,this);
         return new GameController(this);
     }

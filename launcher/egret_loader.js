@@ -26,14 +26,26 @@
  */
 
 egret_h5.startGame = function () {
+
     var  context = egret.MainContext.instance;
     context.touchContext = new egret.HTML5TouchContext();
-    context.deviceContext = new egret.HTML5DeviceContext();
+    context.deviceContext = new egret.HTML5DeviceContext(60);//arg
     context.netContext = new egret.HTML5NetContext();
 
-    var GameWin = {w:640,h:960};
+    var is_ios = function () {
+        var u = navigator.userAgent
+        return (u.indexOf('iPhone')||u.indexOf('iPad'));
+    }
+
+    var GameWin = {w:320,h:480};
+    if (is_ios){
+        GameWin.w *=2;
+        GameWin.h *=2;
+        //console.log('is ios!')
+    }
     var Gper = GameWin.h/GameWin.w;
     var per = window.innerHeight/window.innerWidth;
+    //console.log(10>>1)
     if(per==Gper||per<=1){
         egret.StageDelegate.getInstance().setDesignSize(GameWin.w, GameWin.h);
     }else if(per<Gper&&per>1){
@@ -41,6 +53,8 @@ egret_h5.startGame = function () {
     }else if(per>Gper){
         egret.StageDelegate.getInstance().setDesignSize(GameWin.w, GameWin.w*per);
     }
+
+    //egret.StageDelegate.getInstance().setDesignSize(window.innerWidth, window.innerHeight);
 
     context.stage = new egret.Stage();
     var scaleMode =  egret.MainContext.deviceType == egret.MainContext.DEVICE_MOBILE ? egret.StageScaleMode.SHOW_ALL : egret.StageScaleMode.NO_SCALE;

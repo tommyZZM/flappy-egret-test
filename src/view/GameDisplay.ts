@@ -20,7 +20,7 @@ class GameDisplay extends egret.DisplayObjectContainer{
 
     //背景
     public preloadBg(){
-        this.background = new egret.Bitmap()
+        this.background = new egret.Bitmap();
         this.background.texture = RES.getRes('background');
         this.background.fillMode = egret.BitmapFillMode.SCALE;
 
@@ -39,7 +39,7 @@ class GameDisplay extends egret.DisplayObjectContainer{
     public helloPlay(){
         this.button_start = new Button('button_start',this,
             GlobalVar.stage_width()>>1,GlobalVar.stage_height()>>1,'center');
-        this.button_start.addEventListener(egret.TouchEvent.TOUCH_TAP,this.readyPlay,this);
+        //this.button_start.addEventListener(egret.TouchEvent.TOUCH_TAP,this.readyPlay,this);
 
         var spriteSheet:egret.BitmapTextSpriteSheet = RES.getRes("flappyfont");
         this.run.score = new egret.BitmapText();
@@ -55,17 +55,19 @@ class GameDisplay extends egret.DisplayObjectContainer{
         this.run.ground = new Ground('obj_ground',GlobalVar.stage_width());
         this.addChild(this.run.ground);
         this.dispatchEvent(this.run);
+
+        this.initGame();
     }
 
     //准备开始
-    private readyPlay(){
+    /*private readyPlay(){
         //Constant.trace('--------  Ready!  -----------');
         this.button_start.visible = false;
         this.button_start.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.readyPlay,this);
 
         //init
         this.initGame();
-    }
+    }*/
 
     //初始化游戏，添加小flappy到场景中
     private initGame(){

@@ -1,6 +1,6 @@
 class AssetsLoadModel extends egret.EventDispatcher{
 
-    public constructor() {
+    public constructor(firstload:string) {
         super();
         //TODO:your code here
 
@@ -8,7 +8,7 @@ class AssetsLoadModel extends egret.EventDispatcher{
         RES.addEventListener(RES.ResourceEvent.GROUP_PROGRESS,this.loadProgress,this);
 
         RES.loadConfig('resource/resource.json','resource/');
-        RES.loadGroup('preload');//RES.loadGroup('preload');
+        RES.loadGroup(firstload);//RES.loadGroup('preload');
     }
 
     //加载完成事件

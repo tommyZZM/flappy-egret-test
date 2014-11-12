@@ -38,7 +38,8 @@ class Obstacle extends egret.DisplayObjectContainer{
         this.Width = top_obj.texture.textureWidth;
         //Constant.trace(this.Width);
 
-        this.addChild(top_obj);this.addChild(bot_obj);
+        this.addChild(top_obj);
+        this.addChild(bot_obj);
     }
 
     public get top(){

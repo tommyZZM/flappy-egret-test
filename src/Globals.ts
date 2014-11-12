@@ -1,10 +1,10 @@
 class Constant{
 
-    public static version = '0.0.9 alpha'
+    public static version = '0.0.9 dev 0.3'
 
-    public static debug = true;
+    public static debug = false;
 
-    public static log(sth){Constant.trace(sth);}
+    public static log(sth){console.log(sth);}
     public static trace(sth){
         if(Constant.debug){
             console.log(sth);
@@ -17,15 +17,15 @@ class GameVar{
     public static flappy_pos:number = 100;
 
     public static world_g():number{
-        return window.innerHeight*0.00125 ;
+        return GlobalVar.stage_height()*0.0015 *GlobalVar.FPSoffset() ;
     }
 
     public static world_speed():number{
-        return GlobalVar.stage_width()*0.00625*GlobalVar.FPmSx();
+        return GlobalVar.stage_width()*0.005 * GlobalVar.FPSoffset();
     }
 
     public static obs_vertic_space():number{
-        return window.innerHeight*0.8 ;
+        return GlobalVar.stage_height()*0.4 ;
     }
 
     public static tap_conut:number = 0;
@@ -46,15 +46,15 @@ class GameVar{
     }
 
     public static obs_density():number {
-        return window.innerWidth * 0.9;
+        return GlobalVar.stage_width() * 0.6;
     }
 }
 
 class GlobalVar{
-    public static FPmS:number
+    public static FPS:number
 
-    public static FPmSx(multiple:number = 16){
-        return GlobalVar.FPmS*multiple;
+    public static FPSoffset(multiple:number = 60){
+        return multiple/GlobalVar.FPS;
     }
 
     public static stage_width():number
