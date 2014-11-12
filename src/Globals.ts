@@ -17,7 +17,7 @@ class GameVar{
     public static flappy_pos:number = 100;
 
     public static world_g():number{
-        return GlobalVar.stage_height()*0.0015 *GlobalVar.FPSoffset() ;
+        return GlobalVar.stage_height()*0.0012 *GlobalVar.FPSoffset() ;
     }
 
     public static world_speed():number{
@@ -25,7 +25,7 @@ class GameVar{
     }
 
     public static obs_vertic_space():number{
-        return GlobalVar.stage_height()*0.4 ;
+        return GlobalVar.stage_height()*0.36 ;
     }
 
     public static tap_conut:number = 0;
