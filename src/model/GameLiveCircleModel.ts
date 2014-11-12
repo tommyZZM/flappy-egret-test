@@ -48,7 +48,7 @@ class GameLiveCircleModel {
 
                 Constant.trace('Ready!tab to start!');
                 if(this.score){
-                    this.score.text = '0';
+                    e.score_min.text = this.score.text = '0';
                 }
 
                 for(var i:number = 0;i<this.obstacles.length;i++){
@@ -59,6 +59,9 @@ class GameLiveCircleModel {
 
                 this.flappy = e.flappy;
                 this.ground = e.ground;
+
+                e.score.x = GlobalVar.stage_width()>>1;
+                e.score.y = 100;
                 this.score = e.score;
 
                 this.ready(1);
@@ -79,6 +82,7 @@ class GameLiveCircleModel {
                 break;
             }
             case GameStatus.OVER:{
+                e.score_min.text = e.score.text;
                 e.medal.toggle(GameVar.flappy_level());
                 Constant.trace('Game Over!' + ' level:' +GameVar.flappy_level()+' mark:'+GameVar.obs_conut+' tab-counts:'+GameVar.tap_conut);
 

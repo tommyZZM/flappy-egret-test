@@ -114,6 +114,16 @@ class GameDisplay extends egret.DisplayObjectContainer{
         this.button_restart.y = this.over_dia.y+120;
         this.button_restart.scale(0.6);
 
+        var spriteSheet:egret.BitmapTextSpriteSheet = RES.getRes("flappyfont");
+        this.run.score_min = new egret.BitmapText();
+        this.run.score_min.spriteSheet = spriteSheet;
+        this.run.score_min.scaleX = this.run.score_min.scaleY = 0.3;
+        this.run.score_min.anchorX = this.run.score_min.anchorY = 0.5;
+        this.run.score_min.x = 180;
+        this.run.score_min.y = 45;
+        this.run.score_min.text = '0';
+        this.over_dia.addChild(this.run.score_min);
+
         this.run.medal = new Medal();
         this.over_dia.addChild(this.run.medal);
 

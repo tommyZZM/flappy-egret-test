@@ -11,6 +11,8 @@ class FlappyEvents extends egret.Event {
     public score:egret.BitmapText = null;
     public medal:Medal = null;
 
+    public score_min:egret.BitmapText = null;
+
     public constructor(type:string, bubbles:boolean = false, cancelable:boolean = false) {
         //TODO:your code here
         super(type, bubbles, cancelable);
