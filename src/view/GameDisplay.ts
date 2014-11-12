@@ -82,6 +82,7 @@ class GameDisplay extends egret.DisplayObjectContainer{
     }
 
     public startPlay(){
+        this.button_start.visible = false;
         this.removeEventListener(egret.TouchEvent.TOUCH_BEGIN,this.startPlay,this);
         this.run.status = GameStatus.PLAYING;//开始玩耍
         this.dispatchEvent(this.run);
@@ -147,6 +148,8 @@ class GameDisplay extends egret.DisplayObjectContainer{
         this.over_dia.visible = false;
         this.over_title.visible = false;
         this.button_restart.visible = false;
+
+        this.button_start.visible = true;
 
         this.initGame();
     }

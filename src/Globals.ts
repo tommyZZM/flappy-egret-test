@@ -21,7 +21,7 @@ class GameVar{
     }
 
     public static world_speed():number{
-        return egret.MainContext.instance.stage.stageWidth*0.00625 ;
+        return GlobalVar.stage_width()*0.00625*GlobalVar.FPmSx();
     }
 
     public static obs_vertic_space():number{
@@ -51,6 +51,12 @@ class GameVar{
 }
 
 class GlobalVar{
+    public static FPmS:number
+
+    public static FPmSx(multiple:number = 16){
+        return GlobalVar.FPmS*multiple;
+    }
+
     public static stage_width():number
     {
         return egret.MainContext.instance.stage.stageWidth;

@@ -16,6 +16,8 @@ class GameLiveCircleModel {
     private stage:egret.DisplayObjectContainer;
     private UI:GameDisplay;
 
+    private _lastTime:number = 0;
+
     public constructor(stage) {
         //TODO:your code here
         this.stage = stage;//获得主场景
@@ -79,6 +81,7 @@ class GameLiveCircleModel {
                 this.curr_top = 0;
                 this.curr_bot = e.ground.level;
 
+                this.flappy.velocity = -6;
                 this.stage.addEventListener(egret.Event.ENTER_FRAME,this.circle,this);
                 this.UI.addEventListener(egret.TouchEvent.TOUCH_TAP,this._ontab,this);
 
@@ -112,11 +115,17 @@ class GameLiveCircleModel {
     }
 
     private scene(){
+        var nowTime:number = egret.getTimer();
+        GlobalVar.FPmS = 1/(nowTime-this._lastTime);
+        this._lastTime = nowTime;
+        //Constant.trace(GlobalVar.FPmS);
+
         this.ground.animate();
     }
 
     //游戏主逻辑,正在游戏时执行
     private circle(){
+
         //初始化最高最底界限
         this.curr_top = 0;
         this.curr_bot = this.ground.level;
@@ -188,7 +197,7 @@ class GameLiveCircleModel {
     }
 
     //flappy挂掉会掉到地上。
-    private die(){
+    private die(dt:number){
         if((this.flappy.y + (this.flappy.height>>1))<=this.curr_bot && (this.flappy.y-(this.flappy.height>>1) )>=this.curr_top){
             this._gravity(this.flappy);
         }else{
@@ -198,8 +207,8 @@ class GameLiveCircleModel {
 
     //点击屏幕，flappy往上飞
     private _ontab(){
-        this.flappy.rotation = 0;
-        this.flappy.velocity = -10;
+        this.flappy.rotation = -20;//点击时flappy的角度
+        this.flappy.velocity = -10;//点击时flappy的速度
         //this.flappy.y -= 80;
         GameVar.tap_conut++;
     }
@@ -210,7 +219,7 @@ class GameLiveCircleModel {
         obj.velocity += g;
 
         obj.rotation ++;
-        obj.y += obj.velocity;
+        obj.y += obj.velocity*GlobalVar.FPmSx();
         //Constant.trace(obj.velocity);
     }
 }
