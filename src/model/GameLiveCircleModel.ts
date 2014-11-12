@@ -18,29 +18,29 @@ class GameLiveCircleModel {
 
     public constructor(stage) {
         //TODO:your code here
-        this.stage = stage;
-        this.UI = new GameDisplay();
+        this.stage = stage;//获得主场景
+        this.UI = new GameDisplay();//初始化图像显示类
     }
 
     public pre(){
-        this.UI.preloadBg();
-        this.stage.addChild(this.UI);
-        this.UI.addEventListener(FlappyEvents.GAME_RUN,this.run,this);
+        this.UI.preloadBg();//预加载背景
+        this.stage.addChild(this.UI);//加载游戏图像&UI
+        this.UI.addEventListener(FlappyEvents.GAME_RUN,this.run,this);//自定义时间GAME_RUN
     }
 
     public hell(){
-        this.UI.helloPlay();
+        this.UI.helloPlay();//加载初始界面
     }
 
-    //Game status
+    //当前游戏状态筛选器
     public run(e:FlappyEvents){
         this.status = e.status;
         switch (e.status){
-            case GameStatus.HELLO:{
+            case GameStatus.HELLO:{//初始界面
                 Constant.trace('Hello Face!');
                 break;
             }
-            case GameStatus.READY:{
+            case GameStatus.READY:{//准备开始
 
                 try{
                     this.stage.removeEventListener(egret.Event.ENTER_FRAME,this.die,this);
@@ -53,6 +53,9 @@ class GameLiveCircleModel {
 
                 for(var i:number = 0;i<this.obstacles.length;i++){
                     this.UI.removeChild(this.obstacles[i]);
+                }
+                for(var i:number = 0;i<this.obstacles_pass.length;i++){
+                    this.UI.removeChild(this.obstacles_pass[i]);
                 }
                 this.obstacles = [];
                 this.obstacles_pass = [];
@@ -69,7 +72,7 @@ class GameLiveCircleModel {
 
                 break;
             }
-            case GameStatus.PLAYING:{
+            case GameStatus.PLAYING:{//正在游戏
                 egret.Tween.removeTweens(this.flappy);
                 Constant.trace('Flappy!');
 
@@ -81,7 +84,7 @@ class GameLiveCircleModel {
 
                 break;
             }
-            case GameStatus.OVER:{
+            case GameStatus.OVER:{//GAME OVER
                 e.score_min.text = e.score.text;
                 e.medal.toggle(GameVar.flappy_level());
                 Constant.trace('Game Over!' + ' level:' +GameVar.flappy_level()+' mark:'+GameVar.obs_conut+' tab-counts:'+GameVar.tap_conut);
@@ -112,12 +115,13 @@ class GameLiveCircleModel {
         this.ground.animate();
     }
 
-    //main logic
+    //游戏主逻辑,正在游戏时执行
     private circle(){
+        //初始化最高最底界限
         this.curr_top = 0;
         this.curr_bot = this.ground.level;
 
-        //add obstacles
+        //添加障碍物
         if(this.disatace_listen == 0){
             //GameVar.obs_conut++;
 
@@ -132,17 +136,19 @@ class GameLiveCircleModel {
             this.score.parent.setChildIndex(this.score,this.score.parent.numChildren+1);
         }
 
+        //对障碍物进行判断
         for(var i:number = 0;i<this.obstacles.length;i++){
             this.obstacles[i].x -=GameVar.world_speed();
             var obs_x:number = this.obstacles[i].x+GlobalVar.stage_width()+200+(this.obstacles[i].Width>>1);
-            obs_x = Math.ceil(obs_x);
 
+            //当障碍物来到flappy所在位置的时候，刷新最高最底界限
             if(obs_x>GameVar.flappy_pos && obs_x<(GameVar.flappy_pos+this.obstacles[i].Width+(this.flappy.height>>1))){
                 this.curr_top = this.obstacles[i].top;
                 this.curr_bot = this.obstacles[i].bot;
                 //Constant.trace(obs_x);
             }
 
+            //把已经经过的障碍物加载到一个数组里，准备删除
             if(obs_x<GameVar.flappy_pos-(this.flappy.height>>1)){
                 this.obstacles_pass.push(this.obstacles.shift());
 
@@ -153,9 +159,11 @@ class GameLiveCircleModel {
                 //Constant.trace('pass one obs!');
             }
         }
-        //delete obs
+
+        //删除已经离开场景的障碍物
         for(var i:number = 0;i<this.obstacles_pass.length;i++){
             this.obstacles_pass[i].x -=GameVar.world_speed();
+
             var obs_x:number = this.obstacles_pass[i].x+GlobalVar.stage_width()+200+(this.obstacles_pass[i].Width>>1);
 
             if(obs_x<-200){
@@ -165,21 +173,21 @@ class GameLiveCircleModel {
             }
         }
 
-        //Constant.trace(this.obstacles[1].x+">"+GameVar.flappy_pos +'&&'+this.obstacles[1].x+"<"+(GameVar.flappy_pos+this.obstacles[0].Width));
-
+        //障碍物密度
         this.disatace_listen+=GameVar.world_speed();
         if(this.disatace_listen >= GameVar.obs_density()){
             this.disatace_listen =0;
         }
 
-        //Drop to ground
+        //判断flappy
         if((this.flappy.y + (this.flappy.height>>1))<=this.curr_bot && (this.flappy.y-(this.flappy.height>>1) )>=this.curr_top){
-            this._gravity(this.flappy);
+            this._gravity(this.flappy);//简单的重力模拟
         }else{
-            this.UI.overPlay();
+            this.UI.overPlay();//如果掉到地上则告诉UI游戏结束
         }
     }
 
+    //flappy挂掉会掉到地上。
     private die(){
         if((this.flappy.y + (this.flappy.height>>1))<=this.curr_bot && (this.flappy.y-(this.flappy.height>>1) )>=this.curr_top){
             this._gravity(this.flappy);
@@ -188,7 +196,7 @@ class GameLiveCircleModel {
         }
     }
 
-
+    //点击屏幕，flappy往上飞
     private _ontab(){
         this.flappy.rotation = 0;
         this.flappy.velocity = -10;
@@ -196,6 +204,7 @@ class GameLiveCircleModel {
         GameVar.tap_conut++;
     }
 
+    //重力模拟
     private _gravity(obj:SpriteEx){
         var g:number;g = GameVar.world_g();
         obj.velocity += g;

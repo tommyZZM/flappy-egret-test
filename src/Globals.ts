@@ -25,7 +25,7 @@ class GameVar{
     }
 
     public static obs_vertic_space():number{
-        return window.innerHeight*0.75 ;
+        return window.innerHeight*0.8 ;
     }
 
     public static tap_conut:number = 0;
@@ -46,7 +46,7 @@ class GameVar{
     }
 
     public static obs_density():number {
-        return window.innerHeight * 0.75;
+        return window.innerWidth * 0.9;
     }
 }
 

@@ -18,6 +18,7 @@ class GameDisplay extends egret.DisplayObjectContainer{
         //TODO:your code here
     }
 
+    //背景
     public preloadBg(){
         this.background = new egret.Bitmap()
         this.background.texture = RES.getRes('background');
@@ -34,6 +35,7 @@ class GameDisplay extends egret.DisplayObjectContainer{
         this.addChild(this.background);
     }
 
+    //开始界面
     public helloPlay(){
         this.button_start = new Button('button_start',this,
             GlobalVar.stage_width()>>1,GlobalVar.stage_height()>>1,'center');
@@ -55,6 +57,7 @@ class GameDisplay extends egret.DisplayObjectContainer{
         this.dispatchEvent(this.run);
     }
 
+    //准备开始
     private readyPlay(){
         //Constant.trace('--------  Ready!  -----------');
         this.button_start.visible = false;
@@ -64,6 +67,7 @@ class GameDisplay extends egret.DisplayObjectContainer{
         this.initGame();
     }
 
+    //初始化游戏，添加小flappy到场景中
     private initGame(){
         if(!this.run.flappy){
             this.run.flappy = new SpriteEx('obj_flappy',this,GameVar.flappy_pos,(this.run.ground.level>>1),'center');
@@ -72,24 +76,26 @@ class GameDisplay extends egret.DisplayObjectContainer{
             this.run.flappy.x = 100;
             this.run.flappy.y = (this.run.ground.level>>1);
         }
-        this.run.status = GameStatus.READY;
+        this.run.status = GameStatus.READY;//游戏状态设置为准备
         this.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.startPlay,this);
-        this.dispatchEvent(this.run);
+        this.dispatchEvent(this.run);//用事件作为包裹传送游戏物体和游戏状态到模型
     }
 
     public startPlay(){
         this.removeEventListener(egret.TouchEvent.TOUCH_BEGIN,this.startPlay,this);
-        this.run.status = GameStatus.PLAYING;
+        this.run.status = GameStatus.PLAYING;//开始玩耍
         this.dispatchEvent(this.run);
     }
 
     public overPlay(){
-        this.run.status = GameStatus.OVER;
-        this.displayOverDialog();
+        this.run.status = GameStatus.OVER;//GAMEOVER
+        this.displayOverDialog();//显示记分板
         this.dispatchEvent(this.run);
     }
 
+    //显示记分板
     private displayOverDialog(){
+        //如果记分板已经初始化，只需要把visible设置为true就行，不需要重绘。
         if(!this.over_dia){
             this.initOverDialog();
         }else{
@@ -100,6 +106,7 @@ class GameDisplay extends egret.DisplayObjectContainer{
 
     }
 
+    //初始化记分板
     private initOverDialog(){
 
         this.over_dia = new SpriteEx('over_dia',null,(GlobalVar.stage_width()>>1),(this.run.ground.level>>1),'center');
@@ -131,10 +138,11 @@ class GameDisplay extends egret.DisplayObjectContainer{
         this.addChild(this.over_dia);
         this.addChild(this.over_title);
 
-        this.button_restart.addEventListener(egret.TouchEvent.TOUCH_TAP,this.resatrtPlay,this)
+        this.button_restart.addEventListener(egret.TouchEvent.TOUCH_TAP,this.resatrtPlay,this);
 
     }
 
+    //重新开始游戏
     private resatrtPlay(){
         this.over_dia.visible = false;
         this.over_title.visible = false;

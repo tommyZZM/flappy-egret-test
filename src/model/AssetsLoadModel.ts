@@ -8,9 +8,10 @@ class AssetsLoadModel extends egret.EventDispatcher{
         RES.addEventListener(RES.ResourceEvent.GROUP_PROGRESS,this.loadProgress,this);
 
         RES.loadConfig('resource/resource.json','resource/');
-        RES.loadGroup('mainload');//RES.loadGroup('preload');
+        RES.loadGroup('preload');//RES.loadGroup('preload');
     }
 
+    //加载完成事件
     private loadComplete(e:RES.ResourceEvent){
         if (e.groupName == "preload") {
             Constant.trace('Pre Load Complete!');
@@ -24,6 +25,7 @@ class AssetsLoadModel extends egret.EventDispatcher{
         }
     }
 
+    //加载进度回调函数
     private loadProgress(e:RES.ResourceEvent){
         if(e.groupName!='RES__CONFIG'){
             var pct = e.itemsLoaded / e.itemsTotal * 100;
