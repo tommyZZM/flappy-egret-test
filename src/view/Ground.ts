@@ -42,7 +42,7 @@ class Ground extends egret.DisplayObjectContainer{
     }
 
     public animate(){
-        this.x -= GameVar.world_speed;
+        this.x -= GameVar.world_speed();
 
         if(this.x<=-this.u_width){
             this.x = 0;

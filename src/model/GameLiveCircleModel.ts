@@ -123,7 +123,7 @@ class GameLiveCircleModel {
 
             var pos = GlobalFun.randRange(GlobalVar.stage_height()/5,GlobalVar.stage_height()>>1);
 
-            var obs:Obstacle = new Obstacle('obj_obstacle',GlobalVar.stage_width()+200,pos,GameVar.obs_vertic_space)
+            var obs:Obstacle = new Obstacle('obj_obstacle',GlobalVar.stage_width()+200,pos,GameVar.obs_vertic_space())
             this.obstacles.push(obs);
             this.UI.addChild(obs);
 
@@ -133,7 +133,7 @@ class GameLiveCircleModel {
         }
 
         for(var i:number = 0;i<this.obstacles.length;i++){
-            this.obstacles[i].x -=GameVar.world_speed;
+            this.obstacles[i].x -=GameVar.world_speed();
             var obs_x:number = this.obstacles[i].x+GlobalVar.stage_width()+200+(this.obstacles[i].Width>>1);
             obs_x = Math.ceil(obs_x);
 
@@ -155,7 +155,7 @@ class GameLiveCircleModel {
         }
         //delete obs
         for(var i:number = 0;i<this.obstacles_pass.length;i++){
-            this.obstacles_pass[i].x -=GameVar.world_speed;
+            this.obstacles_pass[i].x -=GameVar.world_speed();
             var obs_x:number = this.obstacles_pass[i].x+GlobalVar.stage_width()+200+(this.obstacles_pass[i].Width>>1);
 
             if(obs_x<-200){
@@ -167,8 +167,8 @@ class GameLiveCircleModel {
 
         //Constant.trace(this.obstacles[1].x+">"+GameVar.flappy_pos +'&&'+this.obstacles[1].x+"<"+(GameVar.flappy_pos+this.obstacles[0].Width));
 
-        this.disatace_listen+=GameVar.world_speed;
-        if(this.disatace_listen >= GameVar.obs_density){
+        this.disatace_listen+=GameVar.world_speed();
+        if(this.disatace_listen >= GameVar.obs_density()){
             this.disatace_listen =0;
         }
 
@@ -197,7 +197,7 @@ class GameLiveCircleModel {
     }
 
     private _gravity(obj:SpriteEx){
-        var g:number;g = GameVar.world_g;
+        var g:number;g = GameVar.world_g();
         obj.velocity += g;
 
         obj.rotation ++;

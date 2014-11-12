@@ -34,12 +34,12 @@ egret_h5.startGame = function () {
     var GameWin = {w:640,h:960};
     var Gper = GameWin.h/GameWin.w;
     var per = window.innerHeight/window.innerWidth;
-    if(per<Gper){
+    if(per==Gper||per<=1){
+        egret.StageDelegate.getInstance().setDesignSize(GameWin.w, GameWin.h);
+    }else if(per<Gper&&per>1){
         egret.StageDelegate.getInstance().setDesignSize(GameWin.h/per, GameWin.h);
     }else if(per>Gper){
         egret.StageDelegate.getInstance().setDesignSize(GameWin.w, GameWin.w*per);
-    }else if(per==Gper){
-        egret.StageDelegate.getInstance().setDesignSize(GameWin.w, GameWin.h);
     }
 
     context.stage = new egret.Stage();

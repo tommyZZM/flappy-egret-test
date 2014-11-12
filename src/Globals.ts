@@ -16,11 +16,17 @@ class Constant{
 class GameVar{
     public static flappy_pos:number = 100;
 
-    public static world_g:number = window.innerHeight*0.00125 ;
+    public static world_g():number{
+        return window.innerHeight*0.00125 ;
+    }
 
-    public static world_speed:number = window.innerWidth*0.00625;
+    public static world_speed():number{
+        return egret.MainContext.instance.stage.stageWidth*0.00625 ;
+    }
 
-    public static obs_vertic_space:number = window.innerHeight*0.75 ;
+    public static obs_vertic_space():number{
+        return window.innerHeight*0.75 ;
+    }
 
     public static tap_conut:number = 0;
 
@@ -39,7 +45,9 @@ class GameVar{
         return l;
     }
 
-    public static obs_density:number = window.innerHeight*0.75;
+    public static obs_density():number {
+        return window.innerHeight * 0.75;
+    }
 }
 
 class GlobalVar{
