@@ -21,7 +21,7 @@
 
 "groups":
 	[
-        {"name":"preload","keys":"background"},
-        {"name":"mainload","keys":"button_start,button_over,obj_flappy,obj_ground,obj_obstacle,over_title,over_medal,over_dia,flappyfont"}
+        {"name":"preload","keys":""},
+        {"name":"mainload","keys":"background,button_start,button_over,obj_flappy,obj_ground,obj_obstacle,over_title,over_medal,over_dia,flappyfont"}
 	]
 }

@@ -17,6 +17,7 @@ class GameController {
     }
 
     private allLoaded(){
+        this.game.pre();//
         this.game.hell();
     }
 

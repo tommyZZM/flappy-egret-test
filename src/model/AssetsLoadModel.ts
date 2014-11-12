@@ -8,7 +8,7 @@ class AssetsLoadModel extends egret.EventDispatcher{
         RES.addEventListener(RES.ResourceEvent.GROUP_PROGRESS,this.loadProgress,this);
 
         RES.loadConfig('resource/resource.json','resource/');
-        RES.loadGroup('preload')
+        RES.loadGroup('mainload');//RES.loadGroup('preload');
     }
 
     private loadComplete(e:RES.ResourceEvent){

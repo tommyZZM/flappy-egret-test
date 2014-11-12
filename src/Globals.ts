@@ -16,13 +16,15 @@ class Constant{
 class GameVar{
     public static flappy_pos:number = 100;
 
-    public static world_speed:number = 2;
+    public static world_g:number = window.innerHeight*0.00125 ;
 
-    public static obs_vertic_space:number = 360;
+    public static world_speed:number = window.innerWidth*0.00625;
+
+    public static obs_vertic_space:number = window.innerHeight*0.75 ;
 
     public static tap_conut:number = 0;
 
-    public static obs_conut:number = 0 - 2;
+    public static obs_conut:number = 0;
 
     public static flappy_level():number{
         var l = 1;
@@ -37,7 +39,7 @@ class GameVar{
         return l;
     }
 
-    public static obs_density:number = 300;
+    public static obs_density:number = window.innerHeight*0.75;
 }
 
 class GlobalVar{
@@ -63,4 +65,19 @@ class GameStatus{
     public static READY = 1;
     public static PLAYING = 2;
     public static OVER = 0;
+}
+
+class testObject extends egret.Sprite{
+
+    private obj:egret.Shape;
+
+    public constructor(x:number,y:number,size:number){
+        super();
+        this.obj = new egret.Shape;
+        this.obj.graphics.beginFill(0xCD3700);
+        this.obj.graphics.drawCircle(x,y,size*2);
+        this.obj.graphics.endFill();
+        this.addChild(this.obj);
+    }
+
 }

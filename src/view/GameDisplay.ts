@@ -21,11 +21,14 @@ class GameDisplay extends egret.DisplayObjectContainer{
     public preloadBg(){
         this.background = new egret.Bitmap()
         this.background.texture = RES.getRes('background');
+        this.background.fillMode = egret.BitmapFillMode.SCALE;
 
-        var proportion = this.background.width/this.background.height;
 
         this.background.height = GlobalVar.stage_height();
+        this.background.width = GlobalVar.stage_width();
+
         Constant.trace('Global.height ' +GlobalVar.stage_height()+ ' background.height ' +this.background.height);
+        Constant.trace('Global.width ' +GlobalVar.stage_width()+ ' background.width ' +this.background.width);
         //this.background.width = this.background.height / proportion;
 
         this.addChild(this.background);
@@ -43,6 +46,7 @@ class GameDisplay extends egret.DisplayObjectContainer{
         this.run.score.x = GlobalVar.stage_width()>>1;
         this.run.score.y = 100;
         this.run.score.text = '0';
+        //this.run.score.scaleX = this.run.score.scaleY = 0.5;
 
         this.addChild(this.run.score);
 
