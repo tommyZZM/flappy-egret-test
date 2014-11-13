@@ -46,6 +46,9 @@ class GameVar{
     }
 
     public static obs_density():number {
+        if(GlobalVar.stage_width()>GlobalVar.stage_height()){
+            return GlobalVar.stage_width() * 0.3;
+        }
         return GlobalVar.stage_width() * 0.6;
     }
 }

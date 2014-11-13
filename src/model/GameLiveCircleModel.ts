@@ -206,8 +206,8 @@ class GameLiveCircleModel {
         var g:number;g = GameVar.world_g();
         obj.velocity += g;
 
-        obj.rotation ++;
-        obj.y += obj.velocity;
+        obj.rotation += GlobalVar.FPSoffset();
+        obj.y += obj.velocity*GlobalVar.FPSoffset();
         //Constant.trace(obj.velocity);
     }
 }
